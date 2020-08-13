@@ -15,6 +15,7 @@ pipeline {
             sh 'mkdir -p archive'
             sh 'mkdir -p archive/app'
             sh 'mkdir -p archive/db_repository'
+            sh 'cp app.db archive/'
             sh 'cp create_db.py archive/'
             sh 'cp downgrade_down.py archive/'
             sh 'cp migrate_db.py archive/'
