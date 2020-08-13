@@ -92,10 +92,4 @@ pipeline {
   environment {
     docker_username = 'benz56'
   }
-  post {
-    always {
-      cleanWS()
-    }
-
-  }
 }
