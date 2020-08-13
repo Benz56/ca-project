@@ -14,10 +14,16 @@ pipeline {
             unstash 'code'
             sh 'mkdir -p archive'
             sh 'mkdir -p archive/app'
+            sh 'mkdir -p archive/db_repository'
+            sh 'cp create_db.py archive/'
+            sh 'cp downgrade_down.py archive/'
+            sh 'cp migrate_db.py archive/'
+            sh 'cp upgrade_db.py archive/'
             sh 'cp config.py archive/'
             sh 'cp run.py archive/'
             sh 'cp requirements.txt archive/'
             sh 'cp -r app/* archive/app/'
+            sh 'cp -r db_repository/* archive/db_repository/'
             script {
               zip archive: true, dir: 'archive', glob:'', zipFile: 'codechan.zip'
             }
