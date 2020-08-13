@@ -26,7 +26,7 @@ pipeline {
           }
           steps {
             unstash 'code'
-            sh 'ci/build-app.sh'
+            sh 'ci/build-docker.sh'
             stash 'code'
           }
         }
