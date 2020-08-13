@@ -13,11 +13,11 @@ pipeline {
           steps {
             unstash 'code'
             sh 'mkdir -p archive'
+            sh 'echo run.py > archive/run.py'
             script {
               zip archive: true, dir: 'archive', glob:'', zipFile: 'codechan.zip'
             }
 
-            sh 'echo run.py > archive/run.py'
             archiveArtifacts 'codechan.zip'
             stash 'code'
           }
