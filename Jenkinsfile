@@ -28,6 +28,12 @@ pipeline {
         }
 
         stage('unit test') {
+          agent {
+            docker {
+              image 'python:3.8'
+            }
+
+          }
           steps {
             unstash 'code'
             sh 'python pip install -r requirements.txt && python tests.py'
