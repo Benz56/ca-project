@@ -24,6 +24,7 @@ pipeline {
         stage('unit test') {
           steps {
             unstash 'code'
+            sh 'python tests.py'
           }
         }
 
