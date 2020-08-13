@@ -57,7 +57,6 @@ pipeline {
       steps {
         unstash 'code'
         sh 'chmod +x ci/push-docker.sh'
-        stash 'code'
       }
     }
 
