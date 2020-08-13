@@ -14,7 +14,7 @@ pipeline {
             unstash 'code'
             sh 'mkdir -p archive'
             sh 'mkdir -p archive/app'
-            sh 'cp run.py > archive/run.py'
+            sh 'cp run.py > archive/'
             sh 'echo requirements.txt > archive/requirements.txt'
             sh 'cp -r app/* archive/app/'
             script {
