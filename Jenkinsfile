@@ -61,5 +61,11 @@ pipeline {
       }
     }
 
+    stage('dancing man') {
+      steps {
+        sh 'echo look at me I\'m dancing, I\'m danicng!'
+      }
+    }
+
   }
 }
