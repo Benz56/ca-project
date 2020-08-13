@@ -25,6 +25,7 @@ pipeline {
             sh 'cp requirements.txt archive/'
             sh 'cp -r app/* archive/app/'
             sh 'cp -r db_repository/* archive/db_repository/'
+            stash 'archive'
             script {
               zip archive: true, dir: 'archive', glob:'', zipFile: 'codechan.zip'
             }
@@ -72,7 +73,7 @@ pipeline {
         DOCKERCREDS = credentials('docker_login')
       }
       steps {
-        unstash 'code'
+        unstash 'archive'
         sh 'chmod +x ci/push-docker.sh'
       }
     }
