@@ -35,12 +35,7 @@ pipeline {
         }
 
         stage('dockerize application') {
-          agent {
-            docker {
-              image 'gradle:jdk11'
-            }
-
-          }
+          agent any
           steps {
             unstash 'code'
             sh 'chmod +x ci/build-docker.sh'
