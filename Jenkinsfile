@@ -16,7 +16,7 @@ pipeline {
             sh 'mkdir -p archive/app'
             sh 'echo run.py > archive/run.py'
             sh 'echo requirements.txt > archive/requirements.txt'
-            sh 'cp app/* archive/app/'
+            sh 'cp -r app/* archive/app/'
             script {
               zip archive: true, dir: 'archive', glob:'', zipFile: 'codechan.zip'
             }
