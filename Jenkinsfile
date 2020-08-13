@@ -26,7 +26,7 @@ pipeline {
           }
           steps {
             unstash 'code'
-            sh 'echo hello world'
+            sh 'ci/build-app.sh'
             stash 'code'
           }
         }
@@ -56,7 +56,7 @@ pipeline {
       }
       steps {
         unstash 'code'
-        sh 'echo hello world'
+        sh 'ci/push-docker.sh'
         stash 'code'
       }
     }
