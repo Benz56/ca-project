@@ -30,7 +30,7 @@ pipeline {
         stage('unit test') {
           steps {
             unstash 'code'
-            sh 'python pip install -r requirements.txt'
+            sh 'pip install -r requirements.txt'
             sh 'python tests.py'
           }
         }
