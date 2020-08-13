@@ -44,6 +44,7 @@ pipeline {
           steps {
             unstash 'code'
             sh 'chmod +x ci/build-docker.sh'
+            sh 'ci/build-docker.sh'
             stash 'code'
           }
         }
@@ -76,6 +77,7 @@ pipeline {
         unstash 'code'
         sh 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin'
         sh 'chmod +x ci/push-docker.sh'
+        sh 'ci/push-docker.sh'
       }
     }
 
