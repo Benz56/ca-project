@@ -36,7 +36,7 @@ pipeline {
           }
           steps {
             unstash 'code'
-            sh 'python pip install -r requirements.txt && python tests.py'
+            sh 'pip install -r requirements.txt && python tests.py'
           }
         }
 
