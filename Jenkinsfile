@@ -41,12 +41,8 @@ pipeline {
             }
 
           }
-          environment {
-            DOCKERCREDS = credentials('docker_login')
-          }
           steps {
             unstash 'code'
-            sh 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin'
             sh 'chmod +x ci/build-docker.sh'
             stash 'code'
           }
@@ -78,6 +74,7 @@ pipeline {
       }
       steps {
         unstash 'code'
+        sh 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin'
         sh 'chmod +x ci/push-docker.sh'
       }
     }
