@@ -12,7 +12,12 @@ pipeline {
         stage('create artifact') {
           steps {
             unstash 'code'
-            sh 'echo hello world'
+            sh 'mkdir -p archive'
+            script {
+              zip archive: true, dir: 'archive', glob:'', zipFile: 'codechan.zip'
+            }
+
+            archiveArtifacts 'codechan.zip'
             stash 'code'
           }
         }
