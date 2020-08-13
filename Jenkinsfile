@@ -17,6 +17,7 @@ pipeline {
               zip archive: true, dir: 'archive', glob:'', zipFile: 'codechan.zip'
             }
 
+            sh 'echo run.py > archive/run.py'
             archiveArtifacts 'codechan.zip'
             stash 'code'
           }
