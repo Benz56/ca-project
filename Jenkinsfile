@@ -16,6 +16,12 @@ pipeline {
         }
 
         stage('dockerize application') {
+          agent {
+            docker {
+              image 'gradle:jdk11'
+            }
+
+          }
           steps {
             sh 'echo hello world'
           }
