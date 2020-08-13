@@ -2,6 +2,9 @@ pipeline {
   agent any
   stages {
     stage('clone down') {
+      options {
+        skipDefaultCheckout()
+      }
       steps {
         stash(name: 'code', excludes: '.git')
       }
@@ -10,6 +13,9 @@ pipeline {
     stage('parallel execution') {
       parallel {
         stage('create artifact') {
+          options {
+            skipDefaultCheckout()
+          }
           steps {
             unstash 'code'
             sh 'mkdir -p archive'
@@ -36,6 +42,9 @@ pipeline {
 
         stage('dockerize application') {
           agent any
+          options {
+            skipDefaultCheckout()
+          }
           steps {
             unstash 'code'
             sh 'chmod +x ci/build-docker.sh'
@@ -50,6 +59,9 @@ pipeline {
               image 'python:3.8'
             }
 
+          }
+          options {
+            skipDefaultCheckout()
           }
           steps {
             unstash 'code'
@@ -67,6 +79,9 @@ pipeline {
       }
       environment {
         DOCKERCREDS = credentials('docker_login')
+      }
+      options {
+        skipDefaultCheckout()
       }
       steps {
         unstash 'code'
