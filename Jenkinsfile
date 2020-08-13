@@ -68,4 +68,7 @@ pipeline {
     }
 
   }
+  environment {
+    docker_username = 'benz56'
+  }
 }
