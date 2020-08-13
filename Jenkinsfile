@@ -11,7 +11,9 @@ pipeline {
       parallel {
         stage('create artifact') {
           steps {
+            unstash 'code'
             sh 'echo hello world'
+            stash 'code'
           }
         }
 
@@ -23,7 +25,9 @@ pipeline {
 
           }
           steps {
+            unstash 'code'
             sh 'echo hello world'
+            stash 'code'
           }
         }
 
@@ -44,8 +48,16 @@ pipeline {
     }
 
     stage('push docker') {
+      when {
+        branch 'master'
+      }
+      environment {
+        DOCKERCREDS = credentials('docker_login')
+      }
       steps {
+        unstash 'code'
         sh 'echo hello world'
+        stash 'code'
       }
     }
 
