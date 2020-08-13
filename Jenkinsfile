@@ -26,7 +26,7 @@ pipeline {
           }
           steps {
             unstash 'code'
-            sh 'ci/build-docker.sh'
+            sh 'chmod +x ci/build-docker.sh'
             stash 'code'
           }
         }
@@ -56,7 +56,7 @@ pipeline {
       }
       steps {
         unstash 'code'
-        sh 'ci/push-docker.sh'
+        sh 'chmod +x ci/push-docker.sh'
         stash 'code'
       }
     }
