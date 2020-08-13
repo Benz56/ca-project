@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  codechan:
+    build: .
+    ports:
+     - "5000:5000"
+  jenkins:
+    image: praqma/jenkins-kata-jenkins:latest
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - jenkins_home:/var/jcasc/jenkins_home
+      - ./casc-config:/var/jcasc/jenkins_config
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment: 
+      - CASC_JENKINS_CONFIG=/var/jcasc/jenkins_config
+    secrets:
+      - adminpw
+
+secrets:
+  adminpw:
+    file: ./secret/admin.txt
+volumes:
+  jenkins_home:
