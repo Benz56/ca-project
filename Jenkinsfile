@@ -9,7 +9,7 @@ pipeline {
 
     stage('parallel execution') {
       parallel {
-        stage('parallel execution') {
+        stage('create artifact') {
           steps {
             sh 'echo hello world'
           }
@@ -18,6 +18,12 @@ pipeline {
         stage('dockerize application') {
           steps {
             sh 'echo hello world'
+          }
+        }
+
+        stage('unit test') {
+          steps {
+            unstash 'code'
           }
         }
 
