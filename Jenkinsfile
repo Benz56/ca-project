@@ -30,8 +30,7 @@ pipeline {
         stage('unit test') {
           steps {
             unstash 'code'
-            sh 'pip install -r requirements.txt'
-            sh 'python tests.py'
+            sh 'virtualenv venv && . venv/bin/activate && pip install -r requirements.txt && python tests.py'
           }
         }
 
