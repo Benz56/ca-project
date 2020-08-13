@@ -2,9 +2,6 @@ pipeline {
   agent any
   stages {
     stage('clone down') {
-      options {
-        skipDefaultCheckout()
-      }
       steps {
         stash(name: 'code', excludes: '.git')
       }
@@ -14,7 +11,7 @@ pipeline {
       parallel {
         stage('create artifact') {
           options {
-            skipDefaultCheckout()
+            skipDefaultCheckout(true)
           }
           steps {
             unstash 'code'
@@ -43,7 +40,7 @@ pipeline {
         stage('dockerize application') {
           agent any
           options {
-            skipDefaultCheckout()
+            skipDefaultCheckout(true)
           }
           steps {
             unstash 'code'
@@ -61,7 +58,7 @@ pipeline {
 
           }
           options {
-            skipDefaultCheckout()
+            skipDefaultCheckout(true)
           }
           steps {
             unstash 'code'
@@ -81,7 +78,7 @@ pipeline {
         DOCKERCREDS = credentials('docker_login')
       }
       options {
-        skipDefaultCheckout()
+        skipDefaultCheckout(true)
       }
       steps {
         unstash 'code'
@@ -94,5 +91,11 @@ pipeline {
   }
   environment {
     docker_username = 'benz56'
+  }
+  post {
+    always {
+      cleanWS()
+    }
+
   }
 }
